@@ -857,7 +857,11 @@ export default function ModernPortfolio() {
                       <img
                         src={skill.icon}
                         alt={skill.name}
-                        className="w-10 h-10 object-contain"
+                        className={`w-10 h-10 object-contain ${
+                          skill.name === "Express.js" 
+                            ? "bg-white rounded-lg p-1" 
+                            : ""
+                        }`}
                       />
                     )
                   }
@@ -923,7 +927,11 @@ export default function ModernPortfolio() {
                       <img
                         src={skill.icon}
                         alt={skill.name}
-                        className="w-8 h-8 object-contain"
+                        className={`w-8 h-8 object-contain ${
+                          skill.name === "Express.js" 
+                            ? "bg-white rounded-lg p-1" 
+                            : ""
+                        }`}
                       />
                     )
                   }
