@@ -107,7 +107,7 @@ export default function ModernPortfolio() {
     },
     {
       name: "Tailwind CSS",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+      icon: "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg",
       level: 92,
       color: "from-teal-400 to-cyan-500",
     },
@@ -847,9 +847,23 @@ export default function ModernPortfolio() {
               const x = Math.cos((angle * Math.PI) / 180) * radius
               const y = Math.sin((angle * Math.PI) / 180) * radius
 
-              // Determine if the icon is a Lucide icon or an image URL
-              const isLucideIcon = skill.icon.startsWith("lucide:")
-              const IconComponent = isLucideIcon ? Database : null // Only Database is used from Lucide here
+              // Helper function to render the appropriate icon
+              const renderIcon = () => {
+                if (typeof skill.icon === 'string') {
+                  if (skill.icon.startsWith("lucide:")) {
+                    return <Database className="w-10 h-10 text-white" />
+                  } else {
+                    return (
+                      <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        className="w-10 h-10 object-contain"
+                      />
+                    )
+                  }
+                }
+                return null
+              }
 
               return (
                 <motion.div
@@ -879,15 +893,7 @@ export default function ModernPortfolio() {
                           }`,
                       }}
                     >
-                      {isLucideIcon && IconComponent ? (
-                        <IconComponent className="w-10 h-10 text-white" />
-                      ) : (
-                        <img
-                          src={skill.icon || "/placeholder.svg"}
-                          alt={skill.name}
-                          className="w-10 h-10 object-contain"
-                        />
-                      )}
+                      {renderIcon()}
                     </motion.div>
 
                     {/* Skill name tooltip */}
@@ -907,8 +913,23 @@ export default function ModernPortfolio() {
           {/* Skills Grid with Progress Bars */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => {
-              const isLucideIcon = skill.icon.startsWith("lucide:")
-              const IconComponent = isLucideIcon ? Database : null // Only Database is used from Lucide here
+              // Helper function to render the appropriate icon
+              const renderIcon = () => {
+                if (typeof skill.icon === 'string') {
+                  if (skill.icon.startsWith("lucide:")) {
+                    return <Database className="w-8 h-8 text-white" />
+                  } else {
+                    return (
+                      <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        className="w-8 h-8 object-contain"
+                      />
+                    )
+                  }
+                }
+                return null
+              }
 
               return (
                 <motion.div
@@ -926,15 +947,7 @@ export default function ModernPortfolio() {
                       whileHover={{ scale: 1.2, rotate: 10 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {isLucideIcon && IconComponent ? (
-                        <IconComponent className="w-8 h-8 text-white" />
-                      ) : (
-                        <img
-                          src={skill.icon || "/placeholder.svg"}
-                          alt={skill.name}
-                          className="w-8 h-8 object-contain"
-                        />
-                      )}
+                      {renderIcon()}
                     </motion.div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-white group-hover:text-purple-300 transition-colors text-sm">
